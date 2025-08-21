@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Bright Events - Admin</title>
+<link rel="stylesheet" href="/CSS/main.css" />
+<link rel="stylesheet" href="/CSS/admin.css" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Inria+Sans:wght@300&family=Poiret+One&display=swap"
+rel="stylesheet"
+/>
+</head>
+</head>
+<body>
+                          <h1 style="color: var(  --Color--)">BEO- ADMIN</h1>
+<article class="main">
+                      
+<section id="contacts">
+<h1>Contacts</h1>
+<%fetchContacts.forEach(contact=>{%>
+ <div class="box">
+                        <figure>Name: <span><%=contact.name%></span></figure>
+                        <figure>Email: <span><%=contact.email%></span></figure>
+                        <figure>Message: <span><%=contact.message%></span></figure>
+                     
+ </div><%})%>
+
+</section>
+<section id="requests">
+                        <h1>Requests</h1>
+                        <%fetchRequests.forEach(request=>{%>
+                         <div class="box">
+                    
+                        <figure>Name: <span><%=request.name%></span></figure>
+                        <figure>Email: <span><%=request.email%></span></figure>
+                        <figure>Message: <span><%=request.message%></span></figure>
+                        <figure>Date: <span><%=request.date%></span></figure>
+                         </div>
+                        <%})%>
+                        </section>
+</article>
+</body>
+</html>

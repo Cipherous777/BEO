@@ -1,0 +1,38 @@
+
+
+section.news {
+    padding-top: 100px;
+    display: flex;
+    flex-direction: column;
+}
+
+body{
+font-family: var(--Font-family--);
+}
+
+#home {
+    height: 85vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+article{
+height: 300px;
+display: flex;
+justify-content: center;
+align-items: center;
+flex-direction: column;
+gap: 20px;
+}
+
+#home h1{
+opacity: 0;
+transition: opacity 0.5s ease-in;
+}
+
+#home h1.visible{
+text-align: center;
+opacity: 1;
+}

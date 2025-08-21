@@ -1,0 +1,197 @@
+/* MAIN CONTENT STYLES */
+
+main {
+  max-width: 100vw;
+}
+
+/* ABOUT */
+
+#about {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  padding: 0 4rem;
+   min-height: 70vh;
+  margin-top: 2rem;
+}
+
+#about .about-content {
+  display: flex;
+  justify-content: space-between;
+  gap: 1.5rem;
+  width: 100%;
+  align-items: center;
+}
+
+.about-content article {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.about-content article p {
+  text-align: justify;
+  font-size: 1.2rem;
+  width: 500px;
+  font-weight: bold;
+  line-height: 1.5;
+}
+
+.about-content .image img {
+  width: 40vw;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(0, 0, 0, 0.5);
+}
+
+.about-content article button {
+  background-color: var(--Color--);
+  border: none;
+  width: 150px;
+  height: 45px;
+  overflow: hidden;
+  cursor: none;
+  z-index: 1;
+  position: relative;
+  transition: color 0.4s linear;
+  border-radius: 5px;
+}
+
+.about-content article button a:any-link {
+  font-size: 1.2rem;
+  font-family: var(--Font-family--);
+  border-radius: 5px;
+  color: var(--White--);
+}
+
+/* RESPONSIVE DESIGN */
+
+@media screen and (max-width: 990px) {
+  #about {
+    padding: 0 2rem;
+  }
+
+  .about-content article {
+    gap: 1.5rem;
+  }
+
+  .about-content article p {
+    font-size: 1.2rem;
+    width: 45vw;
+  }
+
+  .about-content .image img {
+    width: 400px;
+  }
+
+  .about-content article button {
+    width: 140px;
+    height: 40px;
+  }
+
+  .about-content article button a:any-link {
+    font-size: 1rem;
+  }
+}
+
+@media screen and (max-width: 990px) {
+  .about-content {
+    flex-direction: column-reverse;
+    align-items: center;
+  }
+
+  .about-content article p {
+    width: 100%;
+    font-size: 1.1rem;
+    line-height: 1.6;
+  }
+}
+
+@media screen and (max-width: 460px) {
+  #about {
+    padding: 0 1rem;
+  }
+
+  .about-content .image img {
+    width: 100%;
+  }
+}
+
+/* SERVICES */
+
+#services {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  padding: 2rem 0;
+  padding-bottom: 4rem;
+}
+
+#services .cards {
+  display: flex;
+  gap: 3rem;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  width: 100%;
+}
+
+#services .cards div {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  border-radius: 10px;
+  border-top: 10px solid var(--Color--);
+  border-top-right-radius: 10px;
+  width: 350px;
+  height: 340px;
+  background-color: var(--White--);
+  box-shadow: 5px 5px 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+#services .cards div img {
+  width: 50px;
+}
+
+#services .cards div h1 {
+  font-size: 1.5rem;
+  color: var(--Color--);
+}
+
+#services .cards div p {
+  width: 300px;
+  text-align: center;
+  font-size: 1rem;
+  font-weight: bold;
+  letter-spacing: 1.9;
+}
+
+#services .cards div button {
+  height: 40px;
+  width: 140px;
+  background: var(--Color--);
+  color: var(--White--);
+  font-family: var(--Font-family--);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 3px;
+  margin-top: 1rem;
+  transition: all 0.3s ease;
+}
+
+#services .cards div button:hover {
+  transform: scale(0.95);
+}
+
+/* RESPONSIVE DESIGN */
+
+@media screen and (max-width: 440px) {
+  #services .cards div {
+    width: 290px;
+  }
+}

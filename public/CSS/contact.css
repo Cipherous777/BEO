@@ -1,0 +1,173 @@
+main {
+  max-width: 100vw;
+}
+
+#contact {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-evenly;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  padding-top: 7rem;
+}
+
+.direct-email {
+  display: flex;
+  gap: 2rem;
+  flex-direction: column;
+}
+
+.direct-email div {
+  display: flex;
+  gap: 0.5rem;
+  flex-direction: column;
+}
+
+.direct-email h1 {
+  font-size: 3rem;
+  color: var(--Color--);
+}
+
+.direct-email p {
+  font-weight: bold;
+  font-size: 1.05rem;
+}
+
+.direct-email form {
+  display: flex;
+  gap: 1rem;
+  flex-direction: column;
+}
+
+.direct-email form label input {
+  height: 40px;
+  width: 300px;
+  padding-left: 0.6rem;
+  font-family: var(--Font-family);
+  font-weight: bold;
+  border: 1px solid;
+  border-radius: 3px;
+  outline: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.direct-email form label input:focus {
+  outline: 1px solid var(--Color--);
+}
+
+.direct-email form label textarea {
+  width: 300px;
+  padding-top: 0.6rem;
+  padding-left: 0.6rem;
+  font-family: var(--Font-family);
+  font-weight: bold;
+  border: 1px solid;
+  resize: none;
+  border-radius: 3px;
+  outline: 1px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.direct-email form label textarea:focus {
+  outline: 1px solid var(--Color--);
+}
+
+.direct-email form button {
+  width: 300px;
+  height: 40px;
+  border-radius: 3px;
+  background: var(--Color--);
+  color: white;
+  font-family: sans-serif;
+  text-transform: uppercase;
+  font-weight: light;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+}
+
+.direct-email form button:hover {
+  transform: scale(0.95);
+}
+
+/* CONTACT INFORMATION */
+
+.contact-information {
+  border: 2px solid var(--Color--);
+  border-radius: 5px;
+  height: 400px;
+  width: 320px;
+  padding: 1rem;
+  display: flex;
+  gap: 1.5rem;
+  flex-direction: column;
+}
+
+.contact-information h2 {
+  font-size: 1.8rem;
+  color: var(--Color--);
+}
+
+.contact-information ul {
+  list-style-type: none;
+  line-height: 2.5;
+}
+
+.contact-information ul li {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  font-weight: bold;
+}
+
+@media screen and (max-width: 990px) {
+  .direct-email {
+    gap: 1.5rem;
+  }
+
+  .direct-email h1 {
+    font-size: 2.4rem;
+  }
+
+  .direct-email p {
+    font-size: 1rem;
+  }
+
+  .direct-email form {
+    gap: 0.7rem;
+  }
+
+  .direct-email form label input {
+    height: 40px;
+    width: 300px;
+  }
+
+  /* CONTACT INFORMATION */
+
+  .contact-information {
+    border: 2px solid var(--Color--);
+    border-radius: 5px;
+    height: 300px;
+    width: 300px;
+    padding: 1rem;
+    display: flex;
+    gap: 1.5rem;
+    flex-direction: column;
+  }
+
+  .contact-information h2 {
+    font-size: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 701px) {
+  #contact {
+    flex-direction: column;
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .direct-email {
+    padding: 0;
+  }
+}

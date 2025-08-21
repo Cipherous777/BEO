@@ -1,0 +1,69 @@
+
+/*main*/
+body{
+padding: 20px;
+}
+.main{
+display: flex;
+justify-content: center;
+flex-wrap: wrap;
+gap: 20px;
+}
+#contacts , #requests{
+display: flex;
+gap: 20px;
+flex-direction: column;
+max-width: 500px;
+width: 100%;
+}
+#contacts h1 , #requests h1{
+background-color: var(--Color--);
+padding:20px;
+width: 100%;
+color: var(--White--);
+}
+.box {
+border: 1px solid var(--Color--);
+width: 30rem;
+padding: 20px;
+height: 112px;
+border-radius: 10px;
+color: var(--Black--);
+background-color: var(--White--);
+max-width: 500px;
+width: 100%;
+}
+form{
+display: flex;
+justify-content: center;
+flex-direction: column;
+align-items: center;
+box-shadow:  1px 1px 1px 1px rgba(0,0,0,0.1);
+width: 383px;
+height: 281px;
+gap:20px;
+border-radius: 10px;
+border: 1px solid rgb(0,0,1);
+}
+form label h1{
+font-size: 1.5rem;
+}
+form input{
+padding: 10px;
+font-family: var(--Font-family--);
+border: 1px solid var(--Black--);
+width: 250px;
+}
+form input[type=submit]{
+background-color: var(--Color--);
+width: 100px;
+color: var(--White--);
+cursor: pointer;
+font-size: 1.2rem;
+}
+
+main{
+display: flex;
+justify-content: center;
+padding: 200px;
+}
