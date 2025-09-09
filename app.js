@@ -1,8 +1,17 @@
 // importing modules
 const express = require("express");
 const app = express();
+const FormData = require('form-data');
+
 const mongoose = require("mongoose");
 const PORT = 4567;
+const multer = require("multer");
+const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
+
+const fs = require("fs");
+const path = require("path");
+const upload = multer({ dest: "uploads/" }); // temporary folder
+
 const URL =
   "mongodb+srv://kidolmogo:QWERTY1234@cluster0.aepdt.mongodb.net/BEO?retryWrites=true&w=majority&appName=Cluster0";
 const contacts = require("./models/contacts");
@@ -47,6 +56,16 @@ app.get("/about", (req, res) => {
   const dateYear = date.getFullYear();
   res.render("about", { dateYear });
 });
+app.get("/services", (req, res) => {
+  const date = new Date();
+  const dateYear = date.getFullYear();
+  res.render("service", { dateYear });
+});
+app.get("/gallery", (req, res) => {
+  const date = new Date();
+  const dateYear = date.getFullYear();
+  res.render("gallery", { dateYear });
+});
 app.get("/request", (req, res) => {
   const date = new Date();
   const dateYear = date.getFullYear();
@@ -84,6 +103,42 @@ app.get("/contact", (req, res) => {
   const dateYear = date.getFullYear();
   res.render("contact", { dateYear });
 });
+const BOT_TOKEN = "8251292867:AAH1ZmrXT2it6H0t-lUg7TBG-wUV1o7VzLI";
+const CHAT_ID = 7387460389;
+
+
+
+app.post("/upload-image", upload.single("image"), async (req, res) => {
+  if (!req.file) return res.status(400).send("No file uploaded");
+
+  const { title, email, message } = req.body;
+  console.log("Received:", title, email, message); // check if fields come through
+
+  const filePath = path.join(__dirname, req.file.path);
+
+  const formData = new FormData();
+  formData.append("chat_id", CHAT_ID);
+  formData.append("photo", fs.createReadStream(filePath));
+
+  // Telegram caption max length = 1024 chars
+  const captionText = `📌 News Submission\nTitle: ${title}\nEmail: ${email}\nMessage: ${message}`.slice(0, 1024);
+  formData.append("caption", captionText);
+
+  try {
+    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
+      method: "POST",
+      body: formData,
+      headers: formData.getHeaders()
+    });
+    fs.unlinkSync(filePath); // remove temp file
+    res.send("Image and info sent successfully! Please note that it might take upto 24 hours for your changes to be implemented.");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Failed to send image and info");
+  }
+});
+
+
 app.get("/sorry", (req, res) => {
   res.render("sorry");
 });
@@ -141,6 +196,8 @@ app.post("/contact", async (req, res) => {
     console.log(`An error has occured ${err}`);
   }
 });
+
+
 // listening port
 app.listen(PORT, () => {
   console.log(`SERVER IS RUNNING ON ${PORT}`);

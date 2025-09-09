@@ -1,0 +1,39 @@
+#gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-auto-rows: 8px; /* smaller base row height for fine control */
+    gap: 15px;
+    padding: 20px;
+  }
+  
+  #gallery img {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    grid-row-end: span var(--row-span);
+    transition: transform 0.3s ease;
+  }
+  
+  #gallery img:hover {
+    transform: scale(1.03);
+  }
+  
+  /* Responsive breakpoints */
+  @media (min-width: 768px) {
+    #gallery {
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+  }
+  
+  @media (min-width: 1024px) {
+    #gallery {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  main h1 {
+    display: flex
+;
+    justify-content: center;
+    padding-top: 19px;
+    color: var(--Color--);
+}

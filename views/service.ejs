@@ -6,22 +6,23 @@
       name="viewport"
       content="width=device-width, initial-scale=1.0, viewport-fit=cover"
     />
-    <title>Bright events - Request Event</title>
+    <title>Our services - Bright events</title>
     <link rel="icon" href="/Images/logo.png" />
-    <link rel="stylesheet" href="/CSS/contact.css" />
+    <link rel="stylesheet" href="/CSS/landing.css" />
     <link rel="stylesheet" href="/CSS/main.css" />
+    <link rel="stylesheet" href="/CSS/service.css">
     <script defer src="/js/main.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Inria+Sans:wght@300&family=Poiret+One&display=swap"
       rel="stylesheet"
     />
   </head>
   <body>
-    <!--Functions-->
-
     <!-- HEADER -->
+
     <header>
       <nav>
         <h1 id="logo">
@@ -53,6 +54,7 @@
           <span></span>
           <span></span>
         </section>
+        
         <ul class="mobile_nav">
           <li><a href="/index">Home</a></li>
           <li><a href="/about">About</a></li>
@@ -66,62 +68,99 @@
       </nav>
     </header>
 
-    <!-- CONTACT SECTION -->
-    <main>
-      <section id="contact">
-        <article class="direct-email">
-          <div>
-            <h1>Request event</h1>
-            <p>Request an event using this form</p>
-          </div>
-          <form action="/request" method="POST">
-            <label for="name">
-              <input
-                type="text"
-                id="name"
-                name="name"
-                placeholder="Full Name"
-                autocapitalize="on"
-                autocomplete="off"
-                autofocus="false"
-                required
-              />
-            </label>
-            <label for="email">
-              <input
-                type="email"
-                id="email"
-                name="email"
-                placeholder="Email Address"
-                required
-              />
-            </label>
-            <label for="date">
-              <input
-                type="input"
-                name="date"
-                id="date"
-                placeholder="Date of the event"
-              />
-            </label>
-            <label for="message">
-              <textarea
-                placeholder="Description"
-                name="message"
-                id="message"
-                cols="30"
-                rows="10"
-                required
-              >
-I want...</textarea
-              >
-            </label>
+    <!-- MAIN CONTENT -->
 
-            <button type="submit" id="submit">Send</button>
-          </form>
-        </article>
-      </section>
+    <main>
+      <!-- INTRO -->
+
+
+      <!-- ABOUT  -->
+
+    
+    <section id="servicesWeProvide" style="  padding: 10rem 0;">
+        <div class="title">
+            <h1 id="title" style="display: flex; justify-content: center; align-items: center;">Services we provide</h1>
+        </div>
+        <div class="lists">
+            <div class="list-card">
+              <h3>Corporate</h3>
+              <ul>
+                <li>Meetings</li>
+                <li>Product launches</li>
+                <li>Seminars</li>
+                <li>Conferences</li>
+              </ul>
+            </div>
+          
+            <div class="list-card">
+              <h3>Special Events</h3>
+              <ul>
+                <li>Inaugurations</li>
+                <li>Award ceremonies</li>
+                <li>Fashion shows</li>
+                <li>Corporate events</li>
+              </ul>
+            </div>
+          
+            <div class="list-card">
+              <h3>Expos</h3>
+              <ul>
+                <li>Trade shows</li>
+                <li>Exhibitions</li>
+                <li>Concerts</li>
+                <li>Festivals</li>
+              </ul>
+            </div>
+          
+            <div class="list-card">
+              <h3>Personal</h3>
+              <ul>
+                <li>Weddings</li>
+                <li>Birthdays</li>
+                <li>Anniversaries</li>
+                <li>Holidays</li>
+              </ul>
+            </div>
+          </div>
+          
+   
+    </section>
+      <section id="services" >
+        <h1 id="title">About our services</h1>
+        <section class="cards">
+          <div class="pre_event">
+            <img src="/Images/Clipboard.png" alt="" />
+            <h1>Pre-Event Planning</h1>
+            <p>
+              We offer services like budget creation, branding, marketing
+              strategy, and venue booking.
+            </p>
+            <a href="/request"><button>I am interested</button></a>
+          </div>
+          <div class="office_management">
+            <img src="/Images/Crane.png" alt="" />
+            <h1>Onsite Management</h1>
+            <p>
+              Our team offers onsite set up, stage management, and friendly
+              staff for seamless event execution.
+            </p>
+            <a href="/request"><button>I am interested</button></a>
+          </div>
+          <div class="post_event">
+            <img src="/Images/Calendar.png" alt="" />
+            <h1>Post-Event</h1>
+            <p>
+              We offer post-event services and tailored sponsor packages for
+              client satisfaction.
+            </p>
+            <a href="/request"><button>I am interested</button></a>
+          </div>
+        </section>
+      </section> 
+     
+      
     </main>
+ 
     <!-- FOOTER -->
 
     <footer>
@@ -186,5 +225,21 @@ I want...</textarea
         </section>
       </article>
     </footer>
+    <script>
+      window.addEventListener("scroll", () => {
+        const nav = document.querySelector("nav");
+        nav.classList.toggle("scroll", window.scrollY > 0);
+      });
+      const dropIcon = document.querySelector('.drop-icon');
+const mobileNav = document.querySelector('.mobile_nav');
+
+dropIcon.addEventListener('click', () => {
+  mobileNav.classList.toggle('show');
+
+  // Animate hamburger
+  dropIcon.classList.toggle('open');
+});
+
+    </script>
   </body>
 </html>

@@ -1,69 +1,137 @@
-
-/*main*/
-body{
-padding: 20px;
+/* FORM CONTAINER */
+form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 90%;
+    max-width: 383px;
+    padding: 30px 20px;
+    background-color: var(--White--);
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+  }
+  
+  /* FORM HEADINGS */
+  form label h1 {
+    font-size: 1.5rem;
+    color: var(--Color--);
+    text-align: center;
+  }
+  
+  /* INPUT FIELDS */
+  form input[type="password"] {
+    width: 100%;
+    max-width: 250px;
+    padding: 10px;
+    border: 1px solid var(--Black--);
+    border-radius: 5px;
+    font-family: var(--Font-family--);
+  }
+  
+  /* SUBMIT BUTTON */
+  form input[type="submit"] {
+    background-color: var(--Color--);
+    color: var(--White--);
+    width: 100%;
+    max-width: 120px;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+  
+  form input[type="submit"]:hover {
+    transform: scale(0.95);
+    background-color: #8c171d; /* slightly darker on hover */
+  }
+  
+  /* RESPONSIVE ADJUSTMENTS */
+  @media screen and (max-width: 400px) {
+    form {
+      padding: 20px 15px;
+    }
+  
+    form input[type="password"] {
+      max-width: 100%;
+    }
+  
+    form input[type="submit"] {
+      max-width: 100%;
+    }
+  
+    form label h1 {
+      font-size: 1.3rem;
+    }
+  }
+  body {
+    font-family: var(--Font-family--);
+    height: 100vh; /* full screen height */
+    display: flex;
+    justify-content: center; /* horizontal center */
+    align-items: center; /* vertical center */
+    background-color: #f5f5f5;
+    padding: 20px;
+  }
+  form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    width: 100%;
+    max-width: 500px; /* bigger than 383px */
+    padding: 40px 30px; /* a little more padding */
+    background-color: var(--White--);
+    border-radius: 12px;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.15);
+    transition: all 0.3s ease;
+  }
+  
+  form input[type="password"] {
+    width: 100%;
+    max-width: 350px; /* bigger input */
+    padding: 12px;
+    border: 1px solid var(--Black--);
+    border-radius: 6px;
+    font-family: var(--Font-family--);
+  }
+  
+  form input[type="submit"] {
+    width: 100%;
+    max-width: 150px; /* bigger button */
+    padding: 12px;
+    font-size: 1.3rem;
+    border-radius: 6px;
+    font-family: var(--Font-family--);
+  }
+  
+  @media screen and (max-width: 500px) {
+    form {
+      padding: 25px 20px;
+      max-width: 90%;
+    }
+  
+    form input[type="password"],
+    form input[type="submit"] {
+      max-width: 100%;
+    }
+  }
+  main {
+    width: 100%;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
 }
-.main{
-display: flex;
-justify-content: center;
-flex-wrap: wrap;
-gap: 20px;
-}
-#contacts , #requests{
-display: flex;
-gap: 20px;
-flex-direction: column;
-max-width: 500px;
-width: 100%;
-}
-#contacts h1 , #requests h1{
-background-color: var(--Color--);
-padding:20px;
-width: 100%;
-color: var(--White--);
-}
-.box {
-border: 1px solid var(--Color--);
-width: 30rem;
-padding: 20px;
-height: 112px;
-border-radius: 10px;
-color: var(--Black--);
-background-color: var(--White--);
-max-width: 500px;
-width: 100%;
-}
-form{
-display: flex;
-justify-content: center;
-flex-direction: column;
-align-items: center;
-box-shadow:  1px 1px 1px 1px rgba(0,0,0,0.1);
-width: 383px;
-height: 281px;
-gap:20px;
-border-radius: 10px;
-border: 1px solid rgb(0,0,1);
-}
-form label h1{
-font-size: 1.5rem;
-}
-form input{
-padding: 10px;
-font-family: var(--Font-family--);
-border: 1px solid var(--Black--);
-width: 250px;
-}
-form input[type=submit]{
-background-color: var(--Color--);
-width: 100px;
-color: var(--White--);
-cursor: pointer;
-font-size: 1.2rem;
-}
-
-main{
-display: flex;
-justify-content: center;
-padding: 200px;
+label {
+    width: 100%;
+    display: flex
+;
+    justify-content: center;
+    align-items: center;
 }

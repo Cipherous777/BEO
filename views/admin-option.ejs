@@ -4,43 +4,253 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Bright Events - Admin</title>
-<link rel="stylesheet" href="/CSS/main.css" />
-<link rel="stylesheet" href="/CSS/admin.css" />
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-href="https://fonts.googleapis.com/css2?family=Ingrid+Darling&family=Inria+Sans:wght@300&family=Poiret+One&display=swap"
-rel="stylesheet"
-/>
-</head>
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --Color--: #a71e23;
+    --White--: #fff;
+    --Black--: #000;
+    --Gray--: #f5f5f5;
+    --Font-family--: 'Poiret One', cursive;
+  }
+
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+ nav{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+ }
+  body {
+    font-family: var(--Font-family--);
+    background: var(--Gray--);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+  }
+
+  h1 {
+    color: var(--Color--);
+    margin-bottom: 20px;
+  }
+
+  .main {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+    max-width: 1200px;
+  }
+
+  section {
+    background: var(--White--);
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    padding: 20px;
+    flex: 1;
+    min-width: 280px;
+  }
+
+  section h2 {
+    margin-bottom: 15px;
+    color: var(--Color--);
+    font-size: 1.5rem;
+  }
+  button{
+    font-family: var(--Font-family--) !important;
+  }
+
+  .box {
+    background: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 12px;
+  }
+
+  .box figure {
+    font-size: 0.95rem;
+    margin-bottom: 5px;
+  }
+
+  .box span {
+    font-weight: bold;
+  }
+
+  /* Create Button */
+  .create-btn {
+    background: var(--Color--);
+    color: var(--White--);
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-bottom: 20px;
+  }
+
+  .create-btn:hover {
+    background: #8c171d;
+    transform: scale(0.97);
+  }
+
+  /* POPUP */
+  .popup-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    backdrop-filter: blur(5px);
+    background-color: rgba(0,0,0,0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+
+  .popup-container.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .popup {
+    background: var(--White--);
+    padding: 30px;
+    border-radius: 12px;
+    max-width: 400px;
+    width: 90%;
+    box-shadow: 0 6px 18px rgba(0,0,0,0.2);
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .popup h3 {
+    color: var(--Color--);
+    text-align: center;
+  }
+
+  .popup input, .popup textarea {
+    width: 100%;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ddd;
+    font-family: var(--Font-family--);
+  }
+
+  .popup button {
+    background: var(--Color--);
+    color: var(--White--);
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 1rem;
+  }
+
+  .popup button:hover {
+    background: #8c171d;
+  }
+
+  .popup .close-btn {
+    background: transparent;
+    color: var(--Color--);
+    border: 2px solid var(--Color--);
+  }
+  #closePopup:hover{
+    color: var(--White--);
+    background-color: var(--Color--);
+  }
+  form {
+    display: flex
+;
+    flex-direction: column;
+    gap: 10px;
+}
+</style>
 </head>
 <body>
-                          <h1 style="color: var(  --Color--)">BEO- ADMIN</h1>
-<article class="main">
-                      
-<section id="contacts">
-<h1>Contacts</h1>
-<%fetchContacts.forEach(contact=>{%>
- <div class="box">
-                        <figure>Name: <span><%=contact.name%></span></figure>
-                        <figure>Email: <span><%=contact.email%></span></figure>
-                        <figure>Message: <span><%=contact.message%></span></figure>
-                     
- </div><%})%>
+<nav>
+    <h1>BEO - Admin</h1>
 
-</section>
-<section id="requests">
-                        <h1>Requests</h1>
-                        <%fetchRequests.forEach(request=>{%>
-                         <div class="box">
-                    
-                        <figure>Name: <span><%=request.name%></span></figure>
-                        <figure>Email: <span><%=request.email%></span></figure>
-                        <figure>Message: <span><%=request.message%></span></figure>
-                        <figure>Date: <span><%=request.date%></span></figure>
-                         </div>
-                        <%})%>
-                        </section>
-</article>
+    <button class="create-btn" id="createBtn">Create</button>
+</nav>
+
+
+<article class="main">
+    <section id="contacts">
+      <h2>Contacts</h2>
+      <% fetchContacts.forEach(contact => { %>
+        <div class="box">
+          <figure>Name: <span><%= contact.name %></span></figure>
+          <figure>Email: <span><%= contact.email %></span></figure>
+          <figure>Message: <span><%= contact.message %></span></figure>
+        </div>
+      <% }) %>
+    </section>
+  
+    <section id="requests">
+      <h2>Requests</h2>
+      <% fetchRequests.forEach(request => { %>
+        <div class="box">
+          <figure>Name: <span><%= request.name %></span></figure>
+          <figure>Email: <span><%= request.email %></span></figure>
+          <figure>Message: <span><%= request.message %></span></figure>
+          <figure>Date: <span><%= request.date %></span></figure>
+        </div>
+      <% }) %>
+    </section>
+  </article>
+  
+
+<!-- POPUP -->
+<div class="popup-container" id="popup">
+  <div class="popup">
+    <h3>Upload </h3>
+    <form action="/upload-image" method="POST" enctype="multipart/form-data">
+        <input type="text" name="title" placeholder="News title" required />
+        <input type="text" name="email" placeholder="News descritpion" required />
+        <textarea name="message" placeholder="Message" rows="4" required></textarea>
+        <input type="file" name="image" accept="image/*" required />
+        <h4>Images might take a day to be recieved.</h4>
+        <button type="submit">Upload Image</button>
+    </form>
+    
+      
+  </div>
+</div>
+
+<script>
+  const createBtn = document.getElementById('createBtn');
+  const popup = document.getElementById('popup');
+  const closeBtn = document.getElementById('closePopup');
+
+  createBtn.addEventListener('click', () => {
+    popup.classList.add('active');
+  });
+
+  closeBtn.addEventListener('click', () => {
+    popup.classList.remove('active');
+  });
+
+  // Close on clicking outside popup
+  popup.addEventListener('click', (e) => {
+    if(e.target === popup){
+      popup.classList.remove('active');
+    }
+  });
+</script>
+
 </body>
 </html>

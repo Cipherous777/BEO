@@ -1,15 +1,9 @@
-const body = document.querySelector("body");
+const dropIcon = document.querySelector('.drop-icon');
+const mobileNav = document.querySelector('.mobile_nav');
 
-// DROP DOWN ICON ACTIVATION
+dropIcon.addEventListener('click', () => {
+  mobileNav.classList.toggle('show');
 
-const dropDown = document.querySelector(".drop-icon");
-const mobileNav = document.querySelector(".mobile_nav");
-dropDown.onclick = () => {
-  dropDown.classList.toggle("active");
-  mobileNav.classList.toggle("active");
-  body.classList.toggle("hidden");
-};
-
-window.onload = () => {
-  window.scrollTo(0, 0);
-};
+  // Animate hamburger
+  dropIcon.classList.toggle('open');
+});

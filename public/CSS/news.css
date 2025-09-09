@@ -1,7 +1,6 @@
 
 
 section.news {
-    padding-top: 100px;
     display: flex;
     flex-direction: column;
 }
@@ -11,14 +10,14 @@ font-family: var(--Font-family--);
 }
 
 #home {
-    height: 85vh;
+    padding-top: 122px;
     display: flex;
     justify-content: center;
     align-items: center;
     
 }
 
-article{
+main article{
 height: 300px;
 display: flex;
 justify-content: center;

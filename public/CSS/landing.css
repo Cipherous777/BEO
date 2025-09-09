@@ -187,7 +187,59 @@ main {
 #services .cards div button:hover {
   transform: scale(0.95);
 }
-
+.photos{
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  justify-content: center;
+}
+.photos .photo-1, .photo-2, .photo-3, .photo-4, .photo-5, .photo-6, .photo-7, .photo-8, .photo-9 {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: center;
+  justify-self: center;
+  align-items: center;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  width: 100%;
+  max-width: 700px;
+  border-radius: 10px;
+}
+.photos .photo-1 img, .photo-2 img, .photo-3 img, .photo-4 img, .photo-5 img, .photo-6 img, .photo-7 img, .photo-8 img, .photo-9 img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+.photos .photo-1 button, .photo-2 button, .photo-3 button, .photo-4 button, .photo-5 button, .photo-6 button, .photo-7 button, .photo-8 button, .photo-9 button {
+  width: 100%;
+  height: 40px;
+  background: var(--Color--);
+  color: var(--White--);
+  font-family: var(--Font-family--);
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 10px;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  border: none;
+  outline: none;
+  margin-top: 1rem;
+}
+.photos .photo-1 button:hover, .photo-2 button:hover, .photo-3 button:hover, .photo-4 button:hover, .photo-5 button:hover, .photo-6 button:hover, .photo-7 button:hover, .photo-8 button:hover, .photo-9 button:hover {
+  transform: scale(0.95);
+}
+.photos .photo-1 h1, .photo-2 h1, .photo-3 h1, .photo-4 h1, .photo-5 h1, .photo-6 h1, .photo-7 h1, .photo-8 h1, .photo-9 h1 {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--Color--);
+}
 /* RESPONSIVE DESIGN */
 
 @media screen and (max-width: 440px) {
