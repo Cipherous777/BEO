@@ -196,11 +196,11 @@ main {
   width: 100%;
   justify-content: center;
 }
-.photos .photo-1, .photo-2, .photo-3, .photo-4, .photo-5, .photo-6, .photo-7, .photo-8, .photo-9 {
+.photos .mySlides.fade{
   display: flex;
   flex-direction: column;
   flex-wrap: wrap;
-  gap: 1rem;
+  gap: 1.2rem;
   justify-content: center;
   justify-self: center;
   align-items: center;
@@ -210,7 +210,7 @@ main {
   max-width: 700px;
   border-radius: 10px;
 }
-.photos .photo-1 img, .photo-2 img, .photo-3 img, .photo-4 img, .photo-5 img, .photo-6 img, .photo-7 img, .photo-8 img, .photo-9 img {
+.photos .mySlides.fade img{
   width: 300px;
   height: 300px;
   object-fit: cover;
@@ -232,13 +232,13 @@ main {
   outline: none;
   margin-top: 1rem;
 }
-.photos .photo-1 button:hover, .photo-2 button:hover, .photo-3 button:hover, .photo-4 button:hover, .photo-5 button:hover, .photo-6 button:hover, .photo-7 button:hover, .photo-8 button:hover, .photo-9 button:hover {
-  transform: scale(0.95);
-}
-.photos .photo-1 h1, .photo-2 h1, .photo-3 h1, .photo-4 h1, .photo-5 h1, .photo-6 h1, .photo-7 h1, .photo-8 h1, .photo-9 h1 {
+
+.photos h1 {
   font-size: 1.5rem;
   font-weight: bold;
   color: var(--Color--);
+  display: flex;
+  justify-content: center;
 }
 /* RESPONSIVE DESIGN */
 
