@@ -1,204 +1,131 @@
-// importing modules
+// ================== IMPORTS ==================
 const express = require("express");
 const app = express();
-const FormData = require('form-data');
-
-const mongoose = require("mongoose");
 const PORT = 4567;
-const multer = require("multer");
-const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch(...args));
 
+const multer = require("multer");
 const fs = require("fs");
 const path = require("path");
-const upload = multer({ dest: "uploads/" }); // temporary folder
 
-const URL =
-  "mongodb+srv://kidolmogo:QWERTY1234@cluster0.aepdt.mongodb.net/BEO?retryWrites=true&w=majority&appName=Cluster0";
-const contacts = require("./models/contacts");
-const requests = require("./models/requests");
-const adminSchema = require("./models/admin");
-// middleware
+// ================== FIREBASE ==================
+const admin = require("firebase-admin");
+const serviceAccount = require("./firebaseKey.json"); // REQUIRED
+
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  storageBucket: "YOUR_PROJECT_ID.appspot.com", // REQUIRED
+});
+
+const db = admin.firestore();
+const bucket = admin.storage().bucket();
+
+// ================== MULTER ==================
+const upload = multer({ dest: "uploads/" });
+
+// ================== EXPRESS CONFIG ==================
 app.use(express.urlencoded({ extended: true }));
-app.set("view engine", "ejs");
-app.use(express.static("public"));
 app.use(express.json());
+app.use(express.static("public"));
+app.set("view engine", "ejs");
 
-// routing
+// ================== ROUTES ==================
 app.get("/", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  res.render("index", { dateYear });
+  res.render("index", { dateYear: new Date().getFullYear() });
 });
-app.get("/home", (req, res) => {
-  res.redirect("/");
+
+["/home", "/landing", "/index"].forEach(route => {
+  app.get(route, (req, res) => res.redirect("/"));
 });
-app.get("/landing", (req, res) => {
-  res.redirect("/");
-});
-app.get("/index", (req, res) => {
-  res.redirect("/");
-});
-app.get("/admin", (req, res) => {
-  res.render("admin");
-});
+
 app.get("/news", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  res.render("news", { dateYear });
+  res.render("news", { dateYear: new Date().getFullYear() });
 });
-app.get("/admin-option", async (req, res) => {
-  const fetchRequests = await requests.find();
-  const fetchContacts = await contacts.find();
-  res.render("admin-option", { fetchRequests, fetchContacts });
-});
-app.get("/about", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  res.render("about", { dateYear });
-});
-app.get("/services", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  res.render("service", { dateYear });
-});
-app.get("/gallery", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  res.render("gallery", { dateYear });
-});
-app.get("/request", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  res.render("request", { dateYear });
-});
-app.get("/portfolio", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  const portfolioData = [
-    {
-      title: "Bright Mom Pregnant Carnival 1",
-      association: "June 12, 2025",
-      imgSrc: "/Images/BMPC-1.jpg",
-      description: "Details about BMPC-1.",
-    },
-    {
-      title: "Bright Mom Pregnant Carnival 2",
-      association: "June 13, 2025",
-      imgSrc: "/Images/BMPC-2.jpg",
-      description: "Details about BMPC-2.",
-    },
-    {
-      title: "Bright Mom Pregnant Carnival 3",
-      association: "June 14, 2025",
-      imgSrc: "/Images/BMPC-3.jpg",
-      description:
-        "The Pregnant Carnival supports maternal health by providing expert advice, wellness activities, and community connections.",
-    },
-  ];
 
-  res.render("portfolio", { dateYear, portfolioData });
-});
 app.get("/contact", (req, res) => {
-  const date = new Date();
-  const dateYear = date.getFullYear();
-  res.render("contact", { dateYear });
+  res.render("contact", { dateYear: new Date().getFullYear() });
 });
-const BOT_TOKEN = "8251292867:AAH1ZmrXT2it6H0t-lUg7TBG-wUV1o7VzLI";
-const CHAT_ID = 7387460389;
 
+app.get("/request", (req, res) => {
+  res.render("request", { dateYear: new Date().getFullYear() });
+});
 
-
-app.post("/upload-image", upload.single("image"), async (req, res) => {
-  if (!req.file) return res.status(400).send("No file uploaded");
-
-  const { title, email, message } = req.body;
-  console.log("Received:", title, email, message); // check if fields come through
-
-  const filePath = path.join(__dirname, req.file.path);
-
-  const formData = new FormData();
-  formData.append("chat_id", CHAT_ID);
-  formData.append("photo", fs.createReadStream(filePath));
-
-  // Telegram caption max length = 1024 chars
-  const captionText = `📌 News Submission\nTitle: ${title}\nEmail: ${email}\nMessage: ${message}`.slice(0, 1024);
-  formData.append("caption", captionText);
-
+// ================== ADMIN ==================
+// ================== ADMIN ==================
+app.get("/admin-option", async (req, res) => {
   try {
-    await fetch(`https://api.telegram.org/bot${BOT_TOKEN}/sendPhoto`, {
-      method: "POST",
-      body: formData,
-      headers: formData.getHeaders()
-    });
-    fs.unlinkSync(filePath); // remove temp file
-    res.send("Image and info sent successfully! Please note that it might take upto 24 hours for your changes to be implemented.");
+    // Fetch news
+    const newsSnap = await db.collection("news").get();
+    const fetchNews = newsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Fetch contacts
+    const contactsSnap = await db.collection("contacts").get();
+    const fetchContacts = contactsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Fetch requests
+    const requestsSnap = await db.collection("requests").get();
+    const fetchRequests = requestsSnap.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+
+    // Render the admin page with all data
+    res.render("admin-option", { fetchNews, fetchContacts, fetchRequests });
   } catch (err) {
     console.error(err);
-    res.status(500).send("Failed to send image and info");
+    res.render("error");
   }
 });
 
+app.get("/admin", (req,res)=>{
+  res.render("admin")
+})
+app.get("/admin-option", (req,res)=>{
+  res.render("admin-option")
+})
+// ================== IMAGE UPLOAD (FIREBASE ONLY) ==================
 
-app.get("/sorry", (req, res) => {
-  res.render("sorry");
-});
-app.use((req, res) => {
-  res.render("404");
-});
-
-// mongodb connection
-async function mongodbConnect() {
+app.post("/contact", async (req, res) => {
   try {
-    await mongoose.connect(URL, {
-      useNewUrlParser: true,
-      useUnifiedTopology: true,
-      serverSelectionTimeoutMS: 20000, // optional
+    const { name, email, message } = req.body;
+
+    // Save to Firestore collection "contacts"
+    await db.collection("contacts").add({
+      name,
+      email,
+      message,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
-    console.log("MongoDB connection established.");
+
+    res.redirect("/"); // back to home
   } catch (err) {
-    console.error("Error connecting to MongoDB:", err);
+    console.error(err);
+    res.render("error");
   }
-}
-
-mongodbConnect();
-
-// posting
+});
 app.post("/request", async (req, res) => {
   try {
     const { name, email, date, message } = req.body;
-    console.log(name);
-    const requestData = new requests({
+
+    // Save to Firestore collection "requests"
+    await db.collection("requests").add({
       name,
       email,
       date,
       message,
+      createdAt: admin.firestore.FieldValue.serverTimestamp(),
     });
 
-    await requestData.save();
-    res.redirect("/");
+    res.redirect("/"); // back to home
   } catch (err) {
+    console.error(err);
     res.render("error");
-    console.log(`An error has occured ${err}`);
-  }
-})
-app.post("/contact", async (req, res) => {
-  try {
-    const { name, email, message } = req.body;
-    const contactData = new contacts({
-      name,
-      email,
-      message,
-    });
-    await contactData.save();
-    res.redirect("/");
-  } catch (err) {
-    res.render("error");
-    console.log(`An error has occured ${err}`);
   }
 });
 
 
-// listening port
+// ================== ERRORS ==================
+app.use((req, res) => {
+  res.render("404");
+});
+
+// ================== START SERVER ==================
 app.listen(PORT, () => {
-  console.log(`SERVER IS RUNNING ON ${PORT}`);
+  console.log(`🚀 Server running on http://localhost:${PORT}`);
 });

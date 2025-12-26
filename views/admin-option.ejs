@@ -181,16 +181,18 @@
 </style>
 </head>
 <body>
-<nav>
-    <h1>BEO - Admin</h1>
 
-    <button class="create-btn" id="createBtn">Create</button>
+<nav>
+  <h1>BEO - Admin</h1>
+ 
 </nav>
 
-
 <article class="main">
-    <section id="contacts">
-      <h2>Contacts</h2>
+
+  <!-- Contacts -->
+  <section id="contacts">
+    <h2>Contacts</h2>
+    <% if(fetchContacts && fetchContacts.length > 0){ %>
       <% fetchContacts.forEach(contact => { %>
         <div class="box">
           <figure>Name: <span><%= contact.name %></span></figure>
@@ -198,10 +200,15 @@
           <figure>Message: <span><%= contact.message %></span></figure>
         </div>
       <% }) %>
-    </section>
-  
-    <section id="requests">
-      <h2>Requests</h2>
+    <% } else { %>
+      <p>No contacts yet.</p>
+    <% } %>
+  </section>
+
+  <!-- Requests -->
+  <section id="requests">
+    <h2>Requests</h2>
+    <% if(fetchRequests && fetchRequests.length > 0){ %>
       <% fetchRequests.forEach(request => { %>
         <div class="box">
           <figure>Name: <span><%= request.name %></span></figure>
@@ -210,24 +217,42 @@
           <figure>Date: <span><%= request.date %></span></figure>
         </div>
       <% }) %>
-    </section>
-  </article>
-  
+    <% } else { %>
+      <p>No requests yet.</p>
+    <% } %>
+  </section>
+
+  <!-- News -->
+  <section id="news">
+    <h2>News</h2>
+    <% if(fetchNews && fetchNews.length > 0){ %>
+      <% fetchNews.forEach(news => { %>
+        <div class="box">
+          <figure>Title: <span><%= news.title %></span></figure>
+          <figure>Description: <span><%= news.message %></span></figure>
+          <% if(news.imageUrl){ %>
+            <figure>Image: <img src="<%= news.imageUrl %>" style="max-width:120px"/></figure>
+          <% } %>
+        </div>
+      <% }) %>
+    <% } else { %>
+      <p>No news yet.</p>
+    <% } %>
+  </section>
+
+</article>
 
 <!-- POPUP -->
 <div class="popup-container" id="popup">
   <div class="popup">
-    <h3>Upload </h3>
+    <h3>Upload News</h3>
     <form action="/upload-image" method="POST" enctype="multipart/form-data">
-        <input type="text" name="title" placeholder="News title" required />
-        <input type="text" name="email" placeholder="News descritpion" required />
-        <textarea name="message" placeholder="Message" rows="4" required></textarea>
-        <input type="file" name="image" accept="image/*" required />
-        <h4>Images might take a day to be recieved.</h4>
-        <button type="submit">Upload Image</button>
+      <input type="text" name="title" placeholder="News title" required />
+      <textarea name="message" placeholder="Description" rows="4" required></textarea>
+      <input type="file" name="image" accept="image/*" required />
+      <button type="submit">Upload Image</button>
     </form>
-    
-      
+    <button class="close-btn" id="closePopup">Close</button>
   </div>
 </div>
 
@@ -236,20 +261,9 @@
   const popup = document.getElementById('popup');
   const closeBtn = document.getElementById('closePopup');
 
-  createBtn.addEventListener('click', () => {
-    popup.classList.add('active');
-  });
-
-  closeBtn.addEventListener('click', () => {
-    popup.classList.remove('active');
-  });
-
-  // Close on clicking outside popup
-  popup.addEventListener('click', (e) => {
-    if(e.target === popup){
-      popup.classList.remove('active');
-    }
-  });
+  createBtn.addEventListener('click', () => popup.classList.add('active'));
+  closeBtn.addEventListener('click', () => popup.classList.remove('active'));
+  popup.addEventListener('click', e => { if(e.target === popup) popup.classList.remove('active'); });
 </script>
 
 </body>
